@@ -36,9 +36,26 @@
                         <td>
                           <datatable-single
                             :row="entry"
-                            field="customer.first_name"
+                            field="customer.trade_account"
                           >
                           </datatable-single>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-primary">
+                          {{ $t('cruds.crmDocument.fields.name') }}
+                        </td>
+                        <td>
+                          {{ entry.name }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-primary">
+                          {{ $t('cruds.crmDocument.fields.type') }}
+                        </td>
+                        <td>
+                          <datatable-enum :row="entry" field="type">
+                          </datatable-enum>
                         </td>
                       </tr>
                       <tr>
@@ -55,10 +72,11 @@
                       </tr>
                       <tr>
                         <td class="text-primary">
-                          {{ $t('cruds.crmDocument.fields.name') }}
+                          {{ $t('cruds.crmDocument.fields.photo') }}
                         </td>
                         <td>
-                          {{ entry.name }}
+                          <datatable-pictures :row="entry" :field="'photo'">
+                          </datatable-pictures>
                         </td>
                       </tr>
                     </tbody>
@@ -76,12 +94,16 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import DatatableSingle from '@components/Datatables/DatatableSingle'
+import DatatableEnum from '@components/Datatables/DatatableEnum'
 import DatatableAttachments from '@components/Datatables/DatatableAttachments'
+import DatatablePictures from '@components/Datatables/DatatablePictures'
 
 export default {
   components: {
     DatatableSingle,
-    DatatableAttachments
+    DatatableEnum,
+    DatatableAttachments,
+    DatatablePictures
   },
   data() {
     return {}

@@ -88,6 +88,12 @@ export default {
               icon: 'table_view',
               path: { name: 'crm_documents.index' },
               gate: 'crm_document_access'
+            },
+            {
+              title: 'cruds.createCustomer.title',
+              icon: 'table_view',
+              path: { name: 'create_customers.index' },
+              gate: 'create_customer_access'
             }
           ]
         }

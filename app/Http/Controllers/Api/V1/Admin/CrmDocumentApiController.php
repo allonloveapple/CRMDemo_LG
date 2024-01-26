@@ -32,6 +32,12 @@ class CrmDocumentApiController extends Controller
                 ->update(['model_id' => $crmDocument->id]);
         }
 
+        if ($media = $request->input('photo', [])) {
+            Media::whereIn('id', data_get($media, '*.id'))
+                ->where('model_id', 0)
+                ->update(['model_id' => $crmDocument->id]);
+        }
+
         return (new CrmDocumentResource($crmDocument))
             ->response()
             ->setStatusCode(Response::HTTP_CREATED);
@@ -43,7 +49,8 @@ class CrmDocumentApiController extends Controller
 
         return response([
             'meta' => [
-                'customer' => CrmCustomer::get(['id', 'first_name']),
+                'customer' => CrmCustomer::get(['id', 'trade_account']),
+                'type'     => CrmDocument::TYPE_SELECT,
             ],
         ]);
     }
@@ -60,6 +67,7 @@ class CrmDocumentApiController extends Controller
         $crmDocument->update($request->validated());
 
         $crmDocument->updateMedia($request->input('document_file', []), 'crm_document_document_file');
+        $crmDocument->updateMedia($request->input('photo', []), 'crm_document_photo');
 
         return (new CrmDocumentResource($crmDocument))
             ->response()
@@ -73,7 +81,8 @@ class CrmDocumentApiController extends Controller
         return response([
             'data' => new CrmDocumentResource($crmDocument->load(['customer'])),
             'meta' => [
-                'customer' => CrmCustomer::get(['id', 'first_name']),
+                'customer' => CrmCustomer::get(['id', 'trade_account']),
+                'type'     => CrmDocument::TYPE_SELECT,
             ],
         ]);
     }

@@ -16,11 +16,13 @@ class CrmStatus extends Model
 
     protected $orderable = [
         'id',
+        'key',
         'name',
     ];
 
     protected $filterable = [
         'id',
+        'key',
         'name',
     ];
 
@@ -31,6 +33,7 @@ class CrmStatus extends Model
     ];
 
     protected $fillable = [
+        'key',
         'name',
         'created_at',
         'updated_at',

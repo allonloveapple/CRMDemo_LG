@@ -43,26 +43,6 @@
                   <div
                     class="form-group bmd-form-group"
                     :class="{
-                      'has-items': entry.email,
-                      'is-focused': activeField == 'email'
-                    }"
-                  >
-                    <label class="bmd-label-floating required">{{
-                      $t('cruds.user.fields.email')
-                    }}</label>
-                    <input
-                      class="form-control"
-                      type="text"
-                      :value="entry.email"
-                      @input="updateEmail"
-                      @focus="focusField('email')"
-                      @blur="clearFocus"
-                      required
-                    />
-                  </div>
-                  <div
-                    class="form-group bmd-form-group"
-                    :class="{
                       'has-items': entry.password,
                       'is-focused': activeField == 'password'
                     }"
@@ -76,6 +56,44 @@
                       :value="entry.password"
                       @input="updatePassword"
                       @focus="focusField('password')"
+                      @blur="clearFocus"
+                    />
+                  </div>
+                  <div
+                    class="form-group bmd-form-group"
+                    :class="{
+                      'has-items': entry.user_name,
+                      'is-focused': activeField == 'user_name'
+                    }"
+                  >
+                    <label class="bmd-label-floating">{{
+                      $t('cruds.user.fields.user_name')
+                    }}</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      :value="entry.user_name"
+                      @input="updateUserName"
+                      @focus="focusField('user_name')"
+                      @blur="clearFocus"
+                    />
+                  </div>
+                  <div
+                    class="form-group bmd-form-group"
+                    :class="{
+                      'has-items': entry.email,
+                      'is-focused': activeField == 'email'
+                    }"
+                  >
+                    <label class="bmd-label-floating">{{
+                      $t('cruds.user.fields.email')
+                    }}</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      :value="entry.email"
+                      @input="updateEmail"
+                      @focus="focusField('email')"
                       @blur="clearFocus"
                     />
                   </div>
@@ -101,6 +119,17 @@
                       @search.focus="focusField('roles')"
                       @search.blur="clearFocus"
                     />
+                  </div>
+                  <div class="form-group">
+                    <label class="required">{{
+                      $t('cruds.user.fields.status')
+                    }}</label>
+                    <v-radio
+                      :value="entry.status"
+                      :options="lists.status"
+                      @change="updateStatus"
+                    >
+                    </v-radio>
                   </div>
                 </div>
               </div>
@@ -153,21 +182,29 @@ export default {
       'updateData',
       'resetState',
       'setName',
-      'setEmail',
       'setPassword',
-      'setRoles'
+      'setUserName',
+      'setEmail',
+      'setRoles',
+      'setStatus'
     ]),
     updateName(e) {
       this.setName(e.target.value)
     },
-    updateEmail(e) {
-      this.setEmail(e.target.value)
-    },
     updatePassword(e) {
       this.setPassword(e.target.value)
     },
+    updateUserName(e) {
+      this.setUserName(e.target.value)
+    },
+    updateEmail(e) {
+      this.setEmail(e.target.value)
+    },
     updateRoles(value) {
       this.setRoles(value)
+    },
+    updateStatus(value) {
+      this.setStatus(value)
     },
     submitForm() {
       this.updateData()

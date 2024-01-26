@@ -2,6 +2,7 @@ function initialState() {
   return {
     entry: {
       id: null,
+      key: '',
       name: '',
       created_at: '',
       updated_at: '',
@@ -82,6 +83,9 @@ const actions = {
         })
     })
   },
+  setKey({ commit }, value) {
+    commit('setKey', value)
+  },
   setName({ commit }, value) {
     commit('setName', value)
   },
@@ -112,6 +116,9 @@ const actions = {
 const mutations = {
   setEntry(state, entry) {
     state.entry = entry
+  },
+  setKey(state, value) {
+    state.entry.key = value
   },
   setName(state, value) {
     state.entry.name = value

@@ -31,6 +31,14 @@
                       </tr>
                       <tr>
                         <td class="text-primary">
+                          {{ $t('cruds.crmStatus.fields.key') }}
+                        </td>
+                        <td>
+                          {{ entry.key }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-primary">
                           {{ $t('cruds.crmStatus.fields.name') }}
                         </td>
                         <td>

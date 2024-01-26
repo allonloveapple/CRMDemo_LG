@@ -6,6 +6,7 @@ use App\Models\Role;
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Response;
+use Illuminate\Support\Arr;
 
 class StoreRoleRequest extends FormRequest
 {
@@ -28,6 +29,14 @@ class StoreRoleRequest extends FormRequest
             'permissions.*.id' => [
                 'integer',
                 'exists:permissions,id',
+            ],
+            'customer_visible' => [
+                'required',
+                'in:' . implode(',', Arr::pluck(Role::CUSTOMER_VISIBLE_RADIO, 'value')),
+            ],
+            'customer_field_visible' => [
+                'string',
+                'nullable',
             ],
         ];
     }

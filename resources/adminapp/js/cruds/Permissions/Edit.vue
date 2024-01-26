@@ -40,6 +40,47 @@
                       required
                     />
                   </div>
+                  <div
+                    class="form-group bmd-form-group"
+                    :class="{
+                      'has-items': entry.permission_name,
+                      'is-focused': activeField == 'permission_name'
+                    }"
+                  >
+                    <label class="bmd-label-floating">{{
+                      $t('cruds.permission.fields.permission_name')
+                    }}</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      :value="entry.permission_name"
+                      @input="updatePermissionName"
+                      @focus="focusField('permission_name')"
+                      @blur="clearFocus"
+                    />
+                  </div>
+                  <div
+                    class="form-group bmd-form-group"
+                    :class="{
+                      'has-items': entry.parent_id !== null,
+                      'is-focused': activeField == 'parent'
+                    }"
+                  >
+                    <label class="bmd-label-floating">{{
+                      $t('cruds.permission.fields.parent')
+                    }}</label>
+                    <v-select
+                      name="parent"
+                      label="title"
+                      :key="'parent-field'"
+                      :value="entry.parent_id"
+                      :options="lists.parent"
+                      :reduce="entry => entry.id"
+                      @input="updateParent"
+                      @search.focus="focusField('parent')"
+                      @search.blur="clearFocus"
+                    />
+                  </div>
                 </div>
               </div>
             </div>
@@ -71,7 +112,7 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('PermissionsSingle', ['entry', 'loading'])
+    ...mapGetters('PermissionsSingle', ['entry', 'loading', 'lists'])
   },
   beforeDestroy() {
     this.resetState()
@@ -90,10 +131,18 @@ export default {
       'fetchEditData',
       'updateData',
       'resetState',
-      'setTitle'
+      'setTitle',
+      'setPermissionName',
+      'setParent'
     ]),
     updateTitle(e) {
       this.setTitle(e.target.value)
+    },
+    updatePermissionName(e) {
+      this.setPermissionName(e.target.value)
+    },
+    updateParent(value) {
+      this.setParent(value)
     },
     submitForm() {
       this.updateData()

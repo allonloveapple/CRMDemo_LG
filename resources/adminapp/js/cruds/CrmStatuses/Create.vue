@@ -23,6 +23,26 @@
                   <div
                     class="form-group bmd-form-group"
                     :class="{
+                      'has-items': entry.key,
+                      'is-focused': activeField == 'key'
+                    }"
+                  >
+                    <label class="bmd-label-floating required">{{
+                      $t('cruds.crmStatus.fields.key')
+                    }}</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      :value="entry.key"
+                      @input="updateKey"
+                      @focus="focusField('key')"
+                      @blur="clearFocus"
+                      required
+                    />
+                  </div>
+                  <div
+                    class="form-group bmd-form-group"
+                    :class="{
                       'has-items': entry.name,
                       'is-focused': activeField == 'name'
                     }"
@@ -77,7 +97,15 @@ export default {
     this.resetState()
   },
   methods: {
-    ...mapActions('CrmStatusesSingle', ['storeData', 'resetState', 'setName']),
+    ...mapActions('CrmStatusesSingle', [
+      'storeData',
+      'resetState',
+      'setKey',
+      'setName'
+    ]),
+    updateKey(e) {
+      this.setKey(e.target.value)
+    },
     updateName(e) {
       this.setName(e.target.value)
     },

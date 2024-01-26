@@ -21,6 +21,15 @@ class UpdatePermissionRequest extends FormRequest
                 'string',
                 'required',
             ],
+            'permission_name' => [
+                'string',
+                'nullable',
+            ],
+            'parent_id' => [
+                'integer',
+                'exists:permissions,id',
+                'nullable',
+            ],
         ];
     }
 }

@@ -37,6 +37,23 @@
                           {{ entry.title }}
                         </td>
                       </tr>
+                      <tr>
+                        <td class="text-primary">
+                          {{ $t('cruds.permission.fields.permission_name') }}
+                        </td>
+                        <td>
+                          {{ entry.permission_name }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-primary">
+                          {{ $t('cruds.permission.fields.parent') }}
+                        </td>
+                        <td>
+                          <datatable-single :row="entry" field="parent.title">
+                          </datatable-single>
+                        </td>
+                      </tr>
                     </tbody>
                   </div>
                 </div>
@@ -51,8 +68,12 @@
 
 <script>
 import { mapGetters, mapActions } from 'vuex'
+import DatatableSingle from '@components/Datatables/DatatableSingle'
 
 export default {
+  components: {
+    DatatableSingle
+  },
   data() {
     return {}
   },

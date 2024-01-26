@@ -14,15 +14,8 @@ class Role extends Model
 
     public $table = 'roles';
 
-    protected $orderable = [
-        'id',
-        'title',
-    ];
-
-    protected $filterable = [
-        'id',
-        'title',
-        'permissions.title',
+    protected $appends = [
+        'customer_visible_label',
     ];
 
     protected $dates = [
@@ -31,11 +24,42 @@ class Role extends Model
         'deleted_at',
     ];
 
+    protected $orderable = [
+        'id',
+        'title',
+        'customer_visible',
+        'customer_field_visible',
+    ];
+
+    protected $filterable = [
+        'id',
+        'title',
+        'customer_visible',
+        'customer_field_visible',
+    ];
+
     protected $fillable = [
         'title',
+        'customer_visible',
+        'customer_field_visible',
         'created_at',
         'updated_at',
         'deleted_at',
+    ];
+
+    public const CUSTOMER_VISIBLE_RADIO = [
+        [
+            'label' => '全部账户',
+            'value' => '1',
+        ],
+        [
+            'label' => '仅自己归属',
+            'value' => '2',
+        ],
+        [
+            'label' => '不可见',
+            'value' => '3',
+        ],
     ];
 
     protected function serializeDate(DateTimeInterface $date)
@@ -46,5 +70,10 @@ class Role extends Model
     public function permissions()
     {
         return $this->belongsToMany(Permission::class);
+    }
+
+    public function getCustomerVisibleLabelAttribute()
+    {
+        return collect(static::CUSTOMER_VISIBLE_RADIO)->firstWhere('value', $this->customer_visible)['label'] ?? '';
     }
 }

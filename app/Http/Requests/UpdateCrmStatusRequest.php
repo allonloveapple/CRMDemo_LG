@@ -17,6 +17,10 @@ class UpdateCrmStatusRequest extends FormRequest
     public function rules()
     {
         return [
+            'key' => [
+                'string',
+                'required',
+            ],
             'name' => [
                 'string',
                 'required',

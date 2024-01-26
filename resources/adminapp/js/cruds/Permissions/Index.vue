@@ -72,6 +72,7 @@ import DatatableActions from '@components/Datatables/DatatableActions'
 import TranslatedHeader from '@components/Datatables/TranslatedHeader'
 import HeaderSettings from '@components/Datatables/HeaderSettings'
 import GlobalSearch from '@components/Datatables/GlobalSearch'
+import DatatableSingle from '@components/Datatables/DatatableSingle'
 
 export default {
   components: {
@@ -95,6 +96,19 @@ export default {
           sortable: true
         },
         {
+          title: 'cruds.permission.fields.permission_name',
+          field: 'permission_name',
+          thComp: TranslatedHeader,
+          sortable: true
+        },
+        {
+          title: 'cruds.permission.fields.parent',
+          field: 'parent.title',
+          thComp: TranslatedHeader,
+          tdComp: DatatableSingle,
+          sortable: true
+        },
+        {
           title: 'global.actions',
           thComp: TranslatedHeader,
           tdComp: DatatableActions,
@@ -104,7 +118,7 @@ export default {
           colStyle: 'width: 150px;'
         }
       ],
-      query: { sort: 'id', order: 'desc', limit: 100, s: '' },
+      query: { sort: 'id', order: 'asc', limit: 100, s: '' },
       xprops: {
         module: 'PermissionsIndex',
         route: 'permissions',

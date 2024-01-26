@@ -52,7 +52,7 @@
                     }}</label>
                     <v-select
                       name="permissions"
-                      label="title"
+                      label="permission_name"
                       :key="'permissions-field'"
                       :value="entry.permissions"
                       :options="lists.permissions"
@@ -61,6 +61,36 @@
                       @input="updatePermissions"
                       @search.focus="focusField('permissions')"
                       @search.blur="clearFocus"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label class="required">{{
+                      $t('cruds.role.fields.customer_visible')
+                    }}</label>
+                    <v-radio
+                      :value="entry.customer_visible"
+                      :options="lists.customer_visible"
+                      @change="updateCustomerVisible"
+                    >
+                    </v-radio>
+                  </div>
+                  <div
+                    class="form-group bmd-form-group"
+                    :class="{
+                      'has-items': entry.customer_field_visible,
+                      'is-focused': activeField == 'customer_field_visible'
+                    }"
+                  >
+                    <label class="bmd-label-floating">{{
+                      $t('cruds.role.fields.customer_field_visible')
+                    }}</label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      :value="entry.customer_field_visible"
+                      @input="updateCustomerFieldVisible"
+                      @focus="focusField('customer_field_visible')"
+                      @blur="clearFocus"
                     />
                   </div>
                 </div>
@@ -108,6 +138,8 @@ export default {
       'resetState',
       'setTitle',
       'setPermissions',
+      'setCustomerVisible',
+      'setCustomerFieldVisible',
       'fetchCreateData'
     ]),
     updateTitle(e) {
@@ -115,6 +147,12 @@ export default {
     },
     updatePermissions(value) {
       this.setPermissions(value)
+    },
+    updateCustomerVisible(value) {
+      this.setCustomerVisible(value)
+    },
+    updateCustomerFieldVisible(e) {
+      this.setCustomerFieldVisible(e.target.value)
     },
     submitForm() {
       this.storeData()

@@ -6,6 +6,7 @@ use App\Models\CrmDocument;
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Response;
+use Illuminate\Support\Arr;
 
 class UpdateCrmDocumentRequest extends FormRequest
 {
@@ -22,17 +23,29 @@ class UpdateCrmDocumentRequest extends FormRequest
                 'exists:crm_customers,id',
                 'required',
             ],
+            'name' => [
+                'string',
+                'required',
+            ],
+            'type' => [
+                'required',
+                'in:' . implode(',', Arr::pluck(CrmDocument::TYPE_SELECT, 'value')),
+            ],
             'document_file' => [
                 'array',
-                'required',
+                'nullable',
             ],
             'document_file.*.id' => [
                 'integer',
                 'exists:media,id',
             ],
-            'name' => [
-                'string',
-                'required',
+            'photo' => [
+                'array',
+                'nullable',
+            ],
+            'photo.*.id' => [
+                'integer',
+                'exists:media,id',
             ],
         ];
     }

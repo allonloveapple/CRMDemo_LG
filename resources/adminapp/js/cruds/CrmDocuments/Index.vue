@@ -73,7 +73,9 @@ import TranslatedHeader from '@components/Datatables/TranslatedHeader'
 import HeaderSettings from '@components/Datatables/HeaderSettings'
 import GlobalSearch from '@components/Datatables/GlobalSearch'
 import DatatableSingle from '@components/Datatables/DatatableSingle'
+import DatatableEnum from '@components/Datatables/DatatableEnum'
 import DatatableAttachments from '@components/Datatables/DatatableAttachments'
+import DatatablePictures from '@components/Datatables/DatatablePictures'
 
 export default {
   components: {
@@ -92,10 +94,23 @@ export default {
         },
         {
           title: 'cruds.crmDocument.fields.customer',
-          field: 'customer.first_name',
+          field: 'customer.trade_account',
           thComp: TranslatedHeader,
           tdComp: DatatableSingle,
           sortable: true
+        },
+        {
+          title: 'cruds.crmDocument.fields.name',
+          field: 'name',
+          thComp: TranslatedHeader,
+          sortable: true
+        },
+        {
+          title: 'cruds.crmDocument.fields.type',
+          field: 'type',
+          thComp: TranslatedHeader,
+          sortable: true,
+          tdComp: DatatableEnum
         },
         {
           title: 'cruds.crmDocument.fields.document_file',
@@ -104,10 +119,10 @@ export default {
           tdComp: DatatableAttachments
         },
         {
-          title: 'cruds.crmDocument.fields.name',
-          field: 'name',
+          title: 'cruds.crmDocument.fields.photo',
+          field: 'photo',
           thComp: TranslatedHeader,
-          sortable: true
+          tdComp: DatatablePictures
         },
         {
           title: 'global.actions',

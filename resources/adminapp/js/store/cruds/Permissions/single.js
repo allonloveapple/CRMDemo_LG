@@ -3,9 +3,14 @@ function initialState() {
     entry: {
       id: null,
       title: '',
+      permission_name: '',
+      parent_id: null,
       created_at: '',
       updated_at: '',
       deleted_at: ''
+    },
+    lists: {
+      parent: []
     },
     loading: false
   }
@@ -15,6 +20,7 @@ const route = 'permissions'
 
 const getters = {
   entry: state => state.entry,
+  lists: state => state.lists,
   loading: state => state.loading
 }
 
@@ -85,6 +91,12 @@ const actions = {
   setTitle({ commit }, value) {
     commit('setTitle', value)
   },
+  setPermissionName({ commit }, value) {
+    commit('setPermissionName', value)
+  },
+  setParent({ commit }, value) {
+    commit('setParent', value)
+  },
   setCreatedAt({ commit }, value) {
     commit('setCreatedAt', value)
   },
@@ -94,9 +106,15 @@ const actions = {
   setDeletedAt({ commit }, value) {
     commit('setDeletedAt', value)
   },
+  fetchCreateData({ commit }) {
+    axios.get(`${route}/create`).then(response => {
+      commit('setLists', response.data.meta)
+    })
+  },
   fetchEditData({ commit, dispatch }, id) {
     axios.get(`${route}/${id}/edit`).then(response => {
       commit('setEntry', response.data.data)
+      commit('setLists', response.data.meta)
     })
   },
   fetchShowData({ commit, dispatch }, id) {
@@ -116,6 +134,12 @@ const mutations = {
   setTitle(state, value) {
     state.entry.title = value
   },
+  setPermissionName(state, value) {
+    state.entry.permission_name = value
+  },
+  setParent(state, value) {
+    state.entry.parent_id = value
+  },
   setCreatedAt(state, value) {
     state.entry.created_at = value
   },
@@ -124,6 +148,9 @@ const mutations = {
   },
   setDeletedAt(state, value) {
     state.entry.deleted_at = value
+  },
+  setLists(state, lists) {
+    state.lists = lists
   },
   setLoading(state, loading) {
     state.loading = loading

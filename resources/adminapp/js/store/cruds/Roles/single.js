@@ -4,12 +4,15 @@ function initialState() {
       id: null,
       title: '',
       permissions: [],
+      customer_visible: '3',
+      customer_field_visible: '',
       created_at: '',
       updated_at: '',
       deleted_at: ''
     },
     lists: {
-      permissions: []
+      permissions: [],
+      customer_visible: []
     },
     loading: false
   }
@@ -93,6 +96,12 @@ const actions = {
   setPermissions({ commit }, value) {
     commit('setPermissions', value)
   },
+  setCustomerVisible({ commit }, value) {
+    commit('setCustomerVisible', value)
+  },
+  setCustomerFieldVisible({ commit }, value) {
+    commit('setCustomerFieldVisible', value)
+  },
   setCreatedAt({ commit }, value) {
     commit('setCreatedAt', value)
   },
@@ -132,6 +141,12 @@ const mutations = {
   },
   setPermissions(state, value) {
     state.entry.permissions = value
+  },
+  setCustomerVisible(state, value) {
+    state.entry.customer_visible = value
+  },
+  setCustomerFieldVisible(state, value) {
+    state.entry.customer_field_visible = value
   },
   setCreatedAt(state, value) {
     state.entry.created_at = value

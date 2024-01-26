@@ -18,6 +18,7 @@ import CrmNotesIndex from './cruds/CrmNotes'
 import CrmNotesSingle from './cruds/CrmNotes/single'
 import CrmDocumentsIndex from './cruds/CrmDocuments'
 import CrmDocumentsSingle from './cruds/CrmDocuments/single'
+import CreateCustomers from './cruds/CreateCustomers'
 
 Vue.use(Vuex)
 
@@ -40,7 +41,8 @@ export default new Vuex.Store({
     CrmNotesIndex,
     CrmNotesSingle,
     CrmDocumentsIndex,
-    CrmDocumentsSingle
+    CrmDocumentsSingle,
+    CreateCustomers
   },
   strict: debug
 })
