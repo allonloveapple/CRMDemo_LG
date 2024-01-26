@@ -14,22 +14,24 @@ class CrmNote extends Model
 
     public $table = 'crm_notes';
 
-    protected $orderable = [
-        'id',
-        'customer.first_name',
-        'note',
-    ];
-
-    protected $filterable = [
-        'id',
-        'customer.first_name',
-        'note',
-    ];
-
     protected $dates = [
         'created_at',
         'updated_at',
         'deleted_at',
+    ];
+
+    protected $orderable = [
+        'id',
+        'customer.trade_account',
+        'note',
+        'created_at',
+    ];
+
+    protected $filterable = [
+        'id',
+        'customer.trade_account',
+        'note',
+        'created_at',
     ];
 
     protected $fillable = [

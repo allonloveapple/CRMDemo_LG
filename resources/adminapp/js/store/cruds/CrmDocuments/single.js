@@ -3,14 +3,17 @@ function initialState() {
     entry: {
       id: null,
       customer_id: null,
-      document_file: [],
       name: '',
+      type: '1',
+      document_file: [],
+      photo: [],
       created_at: '',
       updated_at: '',
       deleted_at: ''
     },
     lists: {
-      customer: []
+      customer: [],
+      type: []
     },
     loading: false
   }
@@ -91,14 +94,23 @@ const actions = {
   setCustomer({ commit }, value) {
     commit('setCustomer', value)
   },
+  setName({ commit }, value) {
+    commit('setName', value)
+  },
+  setType({ commit }, value) {
+    commit('setType', value)
+  },
   insertDocumentFileFile({ commit }, file) {
     commit('insertDocumentFileFile', file)
   },
   removeDocumentFileFile({ commit }, file) {
     commit('removeDocumentFileFile', file)
   },
-  setName({ commit }, value) {
-    commit('setName', value)
+  insertPhotoFile({ commit }, file) {
+    commit('insertPhotoFile', file)
+  },
+  removePhotoFile({ commit }, file) {
+    commit('removePhotoFile', file)
   },
   setCreatedAt({ commit }, value) {
     commit('setCreatedAt', value)
@@ -137,6 +149,12 @@ const mutations = {
   setCustomer(state, value) {
     state.entry.customer_id = value
   },
+  setName(state, value) {
+    state.entry.name = value
+  },
+  setType(state, value) {
+    state.entry.type = value
+  },
   insertDocumentFileFile(state, file) {
     state.entry.document_file.push(file)
   },
@@ -145,8 +163,13 @@ const mutations = {
       return item.id !== file.id
     })
   },
-  setName(state, value) {
-    state.entry.name = value
+  insertPhotoFile(state, file) {
+    state.entry.photo.push(file)
+  },
+  removePhotoFile(state, file) {
+    state.entry.photo = state.entry.photo.filter(item => {
+      return item.id !== file.id
+    })
   },
   setCreatedAt(state, value) {
     state.entry.created_at = value

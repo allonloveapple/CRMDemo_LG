@@ -32,7 +32,7 @@
                     }}</label>
                     <v-select
                       name="customer"
-                      label="first_name"
+                      label="trade_account"
                       :key="'customer-field'"
                       :value="entry.customer_id"
                       :options="lists.customer"
@@ -40,20 +40,6 @@
                       @input="updateCustomer"
                       @search.focus="focusField('customer')"
                       @search.blur="clearFocus"
-                    />
-                  </div>
-                  <div class="form-group">
-                    <label class="required">{{
-                      $t('cruds.crmDocument.fields.document_file')
-                    }}</label>
-                    <attachment
-                      :route="getRoute('crm-documents')"
-                      :collection-name="'crm_document_document_file'"
-                      :media="entry.document_file"
-                      :max-file-size="2"
-                      @file-uploaded="insertDocumentFileFile"
-                      @file-removed="removeDocumentFileFile"
-                      :max-files="1"
                     />
                   </div>
                   <div
@@ -74,6 +60,53 @@
                       @focus="focusField('name')"
                       @blur="clearFocus"
                       required
+                    />
+                  </div>
+                  <div
+                    class="form-group bmd-form-group"
+                    :class="{
+                      'has-items': entry.type,
+                      'is-focused': activeField == 'type'
+                    }"
+                  >
+                    <label class="bmd-label-floating required">{{
+                      $t('cruds.crmDocument.fields.type')
+                    }}</label>
+                    <v-select
+                      name="type"
+                      :key="'type-field'"
+                      :value="entry.type"
+                      :options="lists.type"
+                      :reduce="entry => entry.value"
+                      @input="updateType"
+                      @search.focus="focusField('type')"
+                      @search.blur="clearFocus"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>{{
+                      $t('cruds.crmDocument.fields.document_file')
+                    }}</label>
+                    <attachment
+                      :route="getRoute('crm-documents')"
+                      :collection-name="'crm_document_document_file'"
+                      :media="entry.document_file"
+                      :max-file-size="20"
+                      @file-uploaded="insertDocumentFileFile"
+                      @file-removed="removeDocumentFileFile"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>{{ $t('cruds.crmDocument.fields.photo') }}</label>
+                    <attachment
+                      :route="getRoute('crm-documents')"
+                      :collection-name="'crm_document_photo'"
+                      :media="entry.photo"
+                      :max-file-size="20"
+                      :component="'pictures'"
+                      :accept="'image/*'"
+                      @file-uploaded="insertPhotoFile"
+                      @file-removed="removePhotoFile"
                     />
                   </div>
                 </div>
@@ -124,9 +157,12 @@ export default {
       'storeData',
       'resetState',
       'setCustomer',
+      'setName',
+      'setType',
       'insertDocumentFileFile',
       'removeDocumentFileFile',
-      'setName',
+      'insertPhotoFile',
+      'removePhotoFile',
       'fetchCreateData'
     ]),
     updateCustomer(value) {
@@ -134,6 +170,9 @@ export default {
     },
     updateName(e) {
       this.setName(e.target.value)
+    },
+    updateType(value) {
+      this.setType(value)
     },
     getRoute(name) {
       return `${axios.defaults.baseURL}${name}/media`

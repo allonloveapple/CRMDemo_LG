@@ -17,7 +17,7 @@ class PermissionsApiController extends Controller
     {
         abort_if(Gate::denies('permission_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new PermissionResource(Permission::advancedFilter());
+        return new PermissionResource(Permission::with(['parent'])->advancedFilter());
     }
 
     public function store(StorePermissionRequest $request)
@@ -34,7 +34,9 @@ class PermissionsApiController extends Controller
         abort_if(Gate::denies('permission_create'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return response([
-            'meta' => [],
+            'meta' => [
+                'parent' => Permission::get(['id', 'title']),
+            ],
         ]);
     }
 
@@ -42,7 +44,7 @@ class PermissionsApiController extends Controller
     {
         abort_if(Gate::denies('permission_show'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new PermissionResource($permission);
+        return new PermissionResource($permission->load(['parent']));
     }
 
     public function update(UpdatePermissionRequest $request, Permission $permission)
@@ -59,8 +61,10 @@ class PermissionsApiController extends Controller
         abort_if(Gate::denies('permission_edit'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return response([
-            'data' => new PermissionResource($permission),
-            'meta' => [],
+            'data' => new PermissionResource($permission->load(['parent'])),
+            'meta' => [
+                'parent' => Permission::get(['id', 'title']),
+            ],
         ]);
     }
 

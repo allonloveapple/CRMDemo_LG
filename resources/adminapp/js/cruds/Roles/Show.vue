@@ -44,9 +44,26 @@
                         <td>
                           <datatable-list
                             :row="entry"
-                            field="permissions.title"
+                            field="permissions.permission_name"
                           >
                           </datatable-list>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-primary">
+                          {{ $t('cruds.role.fields.customer_visible') }}
+                        </td>
+                        <td>
+                          <datatable-enum :row="entry" field="customer_visible">
+                          </datatable-enum>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-primary">
+                          {{ $t('cruds.role.fields.customer_field_visible') }}
+                        </td>
+                        <td>
+                          {{ entry.customer_field_visible }}
                         </td>
                       </tr>
                     </tbody>
@@ -64,10 +81,12 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import DatatableList from '@components/Datatables/DatatableList'
+import DatatableEnum from '@components/Datatables/DatatableEnum'
 
 export default {
   components: {
-    DatatableList
+    DatatableList,
+    DatatableEnum
   },
   data() {
     return {}

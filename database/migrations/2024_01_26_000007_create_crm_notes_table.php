@@ -10,7 +10,7 @@ class CreateCrmNotesTable extends Migration
     {
         Schema::create('crm_notes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->longText('note');
+            $table->longText('note')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

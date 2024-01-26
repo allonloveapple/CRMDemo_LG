@@ -36,7 +36,7 @@ class CrmNoteApiController extends Controller
 
         return response([
             'meta' => [
-                'customer' => CrmCustomer::get(['id', 'first_name']),
+                'customer' => CrmCustomer::get(['id', 'trade_account']),
             ],
         ]);
     }
@@ -64,7 +64,7 @@ class CrmNoteApiController extends Controller
         return response([
             'data' => new CrmNoteResource($crmNote->load(['customer'])),
             'meta' => [
-                'customer' => CrmCustomer::get(['id', 'first_name']),
+                'customer' => CrmCustomer::get(['id', 'trade_account']),
             ],
         ]);
     }

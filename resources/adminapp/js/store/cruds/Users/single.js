@@ -3,17 +3,20 @@ function initialState() {
     entry: {
       id: null,
       name: '',
+      password: null,
+      user_name: '',
       email: null,
       email_verified_at: '',
-      password: null,
       roles: [],
+      status: '1',
       remember_token: '',
       created_at: '',
       updated_at: '',
       deleted_at: ''
     },
     lists: {
-      roles: []
+      roles: [],
+      status: []
     },
     loading: false
   }
@@ -94,17 +97,23 @@ const actions = {
   setName({ commit }, value) {
     commit('setName', value)
   },
+  setPassword({ commit }, value) {
+    commit('setPassword', value)
+  },
+  setUserName({ commit }, value) {
+    commit('setUserName', value)
+  },
   setEmail({ commit }, value) {
     commit('setEmail', value)
   },
   setEmailVerifiedAt({ commit }, value) {
     commit('setEmailVerifiedAt', value)
   },
-  setPassword({ commit }, value) {
-    commit('setPassword', value)
-  },
   setRoles({ commit }, value) {
     commit('setRoles', value)
+  },
+  setStatus({ commit }, value) {
+    commit('setStatus', value)
   },
   setRememberToken({ commit }, value) {
     commit('setRememberToken', value)
@@ -146,17 +155,23 @@ const mutations = {
   setName(state, value) {
     state.entry.name = value
   },
+  setPassword(state, value) {
+    state.entry.password = value
+  },
+  setUserName(state, value) {
+    state.entry.user_name = value
+  },
   setEmail(state, value) {
     state.entry.email = value
   },
   setEmailVerifiedAt(state, value) {
     state.entry.email_verified_at = value
   },
-  setPassword(state, value) {
-    state.entry.password = value
-  },
   setRoles(state, value) {
     state.entry.roles = value
+  },
+  setStatus(state, value) {
+    state.entry.status = value
   },
   setRememberToken(state, value) {
     state.entry.remember_token = value

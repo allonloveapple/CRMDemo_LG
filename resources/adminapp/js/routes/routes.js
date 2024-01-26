@@ -198,6 +198,12 @@ const routes = [
             name: 'crm_documents.edit',
             component: () => import('@cruds/CrmDocuments/Edit.vue'),
             meta: { title: 'cruds.crmDocument.title' }
+          },
+          {
+            path: 'create-customers',
+            name: 'create_customers.index',
+            component: () => import('@cruds/CreateCustomers/Index.vue'),
+            meta: { title: 'cruds.createCustomer.title' }
           }
         ]
       }

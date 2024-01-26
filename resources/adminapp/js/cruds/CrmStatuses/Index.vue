@@ -89,6 +89,12 @@ export default {
           colStyle: 'width: 100px;'
         },
         {
+          title: 'cruds.crmStatus.fields.key',
+          field: 'key',
+          thComp: TranslatedHeader,
+          sortable: true
+        },
+        {
           title: 'cruds.crmStatus.fields.name',
           field: 'name',
           thComp: TranslatedHeader,
@@ -104,7 +110,7 @@ export default {
           colStyle: 'width: 150px;'
         }
       ],
-      query: { sort: 'id', order: 'desc', limit: 100, s: '' },
+      query: { sort: 'id', order: 'asc', limit: 100, s: '' },
       xprops: {
         module: 'CrmStatusesIndex',
         route: 'crm_statuses',

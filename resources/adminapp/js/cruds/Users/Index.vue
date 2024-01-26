@@ -73,6 +73,7 @@ import TranslatedHeader from '@components/Datatables/TranslatedHeader'
 import HeaderSettings from '@components/Datatables/HeaderSettings'
 import GlobalSearch from '@components/Datatables/GlobalSearch'
 import DatatableList from '@components/Datatables/DatatableList'
+import DatatableEnum from '@components/Datatables/DatatableEnum'
 
 export default {
   components: {
@@ -96,14 +97,14 @@ export default {
           sortable: true
         },
         {
-          title: 'cruds.user.fields.email',
-          field: 'email',
+          title: 'cruds.user.fields.user_name',
+          field: 'user_name',
           thComp: TranslatedHeader,
           sortable: true
         },
         {
-          title: 'cruds.user.fields.email_verified_at',
-          field: 'email_verified_at',
+          title: 'cruds.user.fields.email',
+          field: 'email',
           thComp: TranslatedHeader,
           sortable: true
         },
@@ -112,6 +113,25 @@ export default {
           field: 'roles.title',
           thComp: TranslatedHeader,
           tdComp: DatatableList
+        },
+        {
+          title: 'cruds.user.fields.status',
+          field: 'status',
+          thComp: TranslatedHeader,
+          sortable: true,
+          tdComp: DatatableEnum
+        },
+        {
+          title: 'cruds.user.fields.created_at',
+          field: 'created_at',
+          thComp: TranslatedHeader,
+          sortable: true
+        },
+        {
+          title: 'cruds.user.fields.updated_at',
+          field: 'updated_at',
+          thComp: TranslatedHeader,
+          sortable: true
         },
         {
           title: 'global.actions',
@@ -123,7 +143,7 @@ export default {
           colStyle: 'width: 150px;'
         }
       ],
-      query: { sort: 'id', order: 'desc', limit: 100, s: '' },
+      query: { sort: 'name', order: 'asc', limit: 100, s: '' },
       xprops: {
         module: 'UsersIndex',
         route: 'users',

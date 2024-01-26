@@ -39,18 +39,18 @@
                       </tr>
                       <tr>
                         <td class="text-primary">
-                          {{ $t('cruds.user.fields.email') }}
+                          {{ $t('cruds.user.fields.user_name') }}
                         </td>
                         <td>
-                          {{ entry.email }}
+                          {{ entry.user_name }}
                         </td>
                       </tr>
                       <tr>
                         <td class="text-primary">
-                          {{ $t('cruds.user.fields.email_verified_at') }}
+                          {{ $t('cruds.user.fields.email') }}
                         </td>
                         <td>
-                          {{ entry.email_verified_at }}
+                          {{ entry.email }}
                         </td>
                       </tr>
                       <tr>
@@ -60,6 +60,31 @@
                         <td>
                           <datatable-list :row="entry" field="roles.title">
                           </datatable-list>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-primary">
+                          {{ $t('cruds.user.fields.status') }}
+                        </td>
+                        <td>
+                          <datatable-enum :row="entry" field="status">
+                          </datatable-enum>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-primary">
+                          {{ $t('cruds.user.fields.created_at') }}
+                        </td>
+                        <td>
+                          {{ entry.created_at }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="text-primary">
+                          {{ $t('cruds.user.fields.updated_at') }}
+                        </td>
+                        <td>
+                          {{ entry.updated_at }}
                         </td>
                       </tr>
                     </tbody>
@@ -77,10 +102,12 @@
 <script>
 import { mapGetters, mapActions } from 'vuex'
 import DatatableList from '@components/Datatables/DatatableList'
+import DatatableEnum from '@components/Datatables/DatatableEnum'
 
 export default {
   components: {
-    DatatableList
+    DatatableList,
+    DatatableEnum
   },
   data() {
     return {}

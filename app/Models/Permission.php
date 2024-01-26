@@ -14,24 +14,30 @@ class Permission extends Model
 
     public $table = 'permissions';
 
-    protected $orderable = [
-        'id',
-        'title',
-    ];
-
-    protected $filterable = [
-        'id',
-        'title',
-    ];
-
     protected $dates = [
         'created_at',
         'updated_at',
         'deleted_at',
     ];
 
+    protected $orderable = [
+        'id',
+        'title',
+        'permission_name',
+        'parent.title',
+    ];
+
+    protected $filterable = [
+        'id',
+        'title',
+        'permission_name',
+        'parent.title',
+    ];
+
     protected $fillable = [
         'title',
+        'permission_name',
+        'parent_id',
         'created_at',
         'updated_at',
         'deleted_at',
@@ -40,5 +46,10 @@ class Permission extends Model
     protected function serializeDate(DateTimeInterface $date)
     {
         return $date->format('Y-m-d H:i:s');
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo(self::class);
     }
 }

@@ -6,6 +6,7 @@ use App\Models\CrmCustomer;
 use Gate;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Response;
+use Illuminate\Support\Arr;
 
 class StoreCrmCustomerRequest extends FormRequest
 {
@@ -17,39 +18,69 @@ class StoreCrmCustomerRequest extends FormRequest
     public function rules()
     {
         return [
-            'first_name' => [
+            'platform' => [
                 'string',
                 'required',
             ],
-            'last_name' => [
+            'platform_type' => [
+                'required',
+                'in:' . implode(',', Arr::pluck(CrmCustomer::PLATFORM_TYPE_SELECT, 'value')),
+            ],
+            'trade_account' => [
                 'string',
                 'required',
             ],
-            'status_id' => [
-                'integer',
-                'exists:crm_statuses,id',
+            'password' => [
+                'required',
+            ],
+            'name' => [
+                'string',
+                'required',
+            ],
+            'last_deposit_time' => [
+                'date_format:' . config('project.datetime_format'),
+                'required',
+            ],
+            'deposit_amount' => [
+                'numeric',
+                'required',
+            ],
+            'ib' => [
+                'string',
+                'required',
+            ],
+            'second_ib' => [
+                'string',
+                'required',
+            ],
+            'bonus' => [
+                'string',
+                'required',
+            ],
+            'rebate' => [
+                'string',
                 'required',
             ],
             'email' => [
-                'nullable',
-            ],
-            'phone' => [
                 'string',
-                'nullable',
+                'required',
             ],
-            'address' => [
+            'mobile' => [
                 'string',
-                'nullable',
+                'required',
             ],
-            'skype' => [
+            'vps' => [
                 'string',
-                'nullable',
+                'required',
             ],
-            'website' => [
+            'vps_account' => [
                 'string',
-                'nullable',
+                'required',
             ],
-            'description' => [
+            'vps_password' => [
+                'required',
+            ],
+            'comment' => [
                 'string',
                 'nullable',
             ],

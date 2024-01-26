@@ -18,7 +18,7 @@ class RolesApiController extends Controller
     {
         abort_if(Gate::denies('role_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new RoleResource(Role::with(['permissions'])->advancedFilter());
+        return new RoleResource(Role::advancedFilter());
     }
 
     public function store(StoreRoleRequest $request)
@@ -37,7 +37,8 @@ class RolesApiController extends Controller
 
         return response([
             'meta' => [
-                'permissions' => Permission::get(['id', 'title']),
+                'permissions'      => Permission::get(['id', 'permission_name']),
+                'customer_visible' => Role::CUSTOMER_VISIBLE_RADIO,
             ],
         ]);
     }
@@ -66,7 +67,8 @@ class RolesApiController extends Controller
         return response([
             'data' => new RoleResource($role->load(['permissions'])),
             'meta' => [
-                'permissions' => Permission::get(['id', 'title']),
+                'permissions'      => Permission::get(['id', 'permission_name']),
+                'customer_visible' => Role::CUSTOMER_VISIBLE_RADIO,
             ],
         ]);
     }

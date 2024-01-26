@@ -91,7 +91,7 @@ export default {
         },
         {
           title: 'cruds.crmNote.fields.customer',
-          field: 'customer.first_name',
+          field: 'customer.trade_account',
           thComp: TranslatedHeader,
           tdComp: DatatableSingle,
           sortable: true
@@ -99,6 +99,12 @@ export default {
         {
           title: 'cruds.crmNote.fields.note',
           field: 'note',
+          thComp: TranslatedHeader,
+          sortable: true
+        },
+        {
+          title: 'cruds.crmNote.fields.created_at',
+          field: 'created_at',
           thComp: TranslatedHeader,
           sortable: true
         },

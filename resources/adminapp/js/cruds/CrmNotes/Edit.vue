@@ -32,7 +32,7 @@
                     }}</label>
                     <v-select
                       name="customer"
-                      label="first_name"
+                      label="trade_account"
                       :key="'customer-field'"
                       :value="entry.customer_id"
                       :options="lists.customer"

@@ -72,7 +72,7 @@ import DatatableActions from '@components/Datatables/DatatableActions'
 import TranslatedHeader from '@components/Datatables/TranslatedHeader'
 import HeaderSettings from '@components/Datatables/HeaderSettings'
 import GlobalSearch from '@components/Datatables/GlobalSearch'
-import DatatableList from '@components/Datatables/DatatableList'
+import DatatableEnum from '@components/Datatables/DatatableEnum'
 
 export default {
   components: {
@@ -96,10 +96,17 @@ export default {
           sortable: true
         },
         {
-          title: 'cruds.role.fields.permissions',
-          field: 'permissions.title',
+          title: 'cruds.role.fields.customer_visible',
+          field: 'customer_visible',
           thComp: TranslatedHeader,
-          tdComp: DatatableList
+          sortable: true,
+          tdComp: DatatableEnum
+        },
+        {
+          title: 'cruds.role.fields.customer_field_visible',
+          field: 'customer_field_visible',
+          thComp: TranslatedHeader,
+          sortable: true
         },
         {
           title: 'global.actions',

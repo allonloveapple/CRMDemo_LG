@@ -36,7 +36,7 @@
                         <td>
                           <datatable-single
                             :row="entry"
-                            field="customer.first_name"
+                            field="customer.trade_account"
                           >
                           </datatable-single>
                         </td>
